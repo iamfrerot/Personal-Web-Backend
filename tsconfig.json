@@ -1,0 +1,15 @@
+{
+ "compilerOptions": {
+  "target": "ES5", // Set the target JavaScript version (e.g., es5, es2015, etc.)
+  "module": "commonjs", // Module system (commonjs, amd, etc.)
+  "strict": true, // Enable strict mode for type checking
+  "outDir": "./build", // Output directory for compiled JavaScript files
+  "rootDir": "./src", // Root directory for source code
+  // "sourceMap": true, // Generate source maps for debugging
+  "allowJs": true, // Allow compilation of plain JavaScript files
+  "esModuleInterop": true, // Enable ES module interop for compatibility
+  "forceConsistentCasingInFileNames": true // Enforce consistent file name casing
+ },
+ "include": ["src/**/*.ts"], // Include all TypeScript files in the src directory
+ "exclude": ["node_modules"] // Exclude the node_modules directory
+}
