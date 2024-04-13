@@ -11,7 +11,7 @@ import guestsRoutes from "./routes/guestsRoutes";
 import adminRoutes from "./routes/adminRoutes";
 
 const app: Express = express();
-const PORT: number | string = process.env.PORT || 3000;
+const PORT: number | string = process.env.PORT || 2000;
 const DB_URI = process.env.DATABASE_URI as string;
 const jwtSecret = process.env.JWT_SECRET as string;
 const storage = multer.memoryStorage();

@@ -17,7 +17,7 @@ const router: Router = express.Router();
 ////// Get requests
 
 router.get("/blogs", get_blogs);
-router.get("/blogs/:id", get_single_blog);
+router.get("/blog/:id", get_single_blog);
 
 //// Post requests
 router.post("/comment/new/:id", post_newComment);

@@ -10,6 +10,6 @@
   "esModuleInterop": true, // Enable ES module interop for compatibility
   "forceConsistentCasingInFileNames": true // Enforce consistent file name casing
  },
- "include": ["src/**/*.ts"], // Include all TypeScript files in the src directory
+ "include": ["src/**/*.ts", "src/swagger.js"], // Include all TypeScript files in the src directory
  "exclude": ["node_modules"] // Exclude the node_modules directory
 }
