@@ -37,7 +37,7 @@ const jwtSecret = process.env.JWT_SECRET as string;
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
-mongoose.connect(`${DB_URI}`).then(() => {
+mongoose.connect(DB_URI).then(() => {
  app.listen(PORT);
  console.log(`Connected To Database Started to listen on PORT:${PORT}`);
 });
@@ -64,7 +64,7 @@ app.use(
   saveUninitialized: true,
   resave: false,
   store: MongoStore.create({
-   mongoUrl: process.env.DATABASE_URI,
+   mongoUrl: DB_URI,
    ttl: 24 * 60 * 60,
   }),
   cookie: {
