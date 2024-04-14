@@ -1,0 +1,22 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+require("dotenv").config();
+var express_1 = __importDefault(require("express"));
+var adminController_1 = require("../Controllers/adminController");
+var guestsContoller_1 = require("../Controllers/guestsContoller");
+var app = (0, express_1.default)();
+var router = express_1.default.Router();
+router.get("/blog/:id", adminController_1.Adget_blog);
+router.get("/subs", adminController_1.Adget_subs);
+router.get("/blogs", guestsContoller_1.get_blogs);
+router.get("/blogsre", adminController_1.Adget_recentBlog);
+router.get("/messages", adminController_1.Adget_messages);
+router.get("/messagesre", adminController_1.Adget_recentMessage);
+router.post("/blog/new", adminController_1.Adpost_newBlog);
+router.put("/blog/update/:id", adminController_1.AdUpdate_blog);
+router.delete("/blog/delete/:id", adminController_1.AdDelete_blog);
+router.delete("/message/delete/:id", adminController_1.AdDelete_message);
+exports.default = router;
