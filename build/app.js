@@ -14,6 +14,8 @@ var connect_mongo_1 = __importDefault(require("connect-mongo"));
 var cors_1 = __importDefault(require("cors"));
 var guestsRoutes_1 = __importDefault(require("./routes/guestsRoutes"));
 var adminRoutes_1 = __importDefault(require("./routes/adminRoutes"));
+var swagger_jsdoc_1 = __importDefault(require("swagger-jsdoc"));
+var swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
 var app = (0, express_1.default)();
 var PORT = process.env.PORT || 2000;
 var DB_URI = process.env.DATABASE_URI;
@@ -75,3 +77,32 @@ var AuthorizationMiddleware = function (req, res, next) {
 ////////////// Routes /////////////
 app.use("/api", guestsRoutes_1.default);
 app.use("/admin", AuthorizationMiddleware, upload.any(), adminRoutes_1.default);
+var info = {
+    title: "My Brand API",
+    version: "6.2.8",
+    description: "This My Portfolio Website API",
+};
+var options = {
+    definition: {
+        info: info,
+        openapi: "3.0.0",
+        servers: [
+            {
+                url: "http://localhost:2000",
+            },
+        ],
+        tags: [
+            {
+                name: "Guests",
+                description: "Operations related to open Api's",
+            },
+            {
+                name: "Auth $ Admin",
+                description: "Operations related to autholized user",
+            },
+        ],
+    },
+    apis: ["./src/routes/*.ts"],
+};
+var spacs = (0, swagger_jsdoc_1.default)(options);
+app.use("/docs", swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(spacs));

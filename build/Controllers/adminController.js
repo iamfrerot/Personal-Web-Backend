@@ -162,7 +162,7 @@ var Adpost_newBlog = function (req, res) { return __awaiter(void 0, void 0, void
                 return [4 /*yield*/, DB_1.Blog.create(newBlog)];
             case 6:
                 _a.sent();
-                res.status(200).json({ message: "Posted Successful" });
+                res.status(200).json({ message: "Posted Successfully" });
                 body_1 = data.body.split(" ")[0];
                 DB_1.Sub.find().then(function (subs) {
                     subs.forEach(function (sub) {

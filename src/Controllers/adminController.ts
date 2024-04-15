@@ -74,7 +74,7 @@ const Adpost_newBlog = async (req: Request, res: Response) => {
    img2: image2url,
   });
   await Blog.create(newBlog);
-  res.status(200).json({ message: "Posted Successful" });
+  res.status(200).json({ message: "Posted Successfully" });
   const body = data.body.split(" ")[0];
   Sub.find().then((subs) => {
    subs.forEach((sub) => {
@@ -155,9 +155,7 @@ const AdUpdate_blog = async (req: Request, res: Response) => {
 
 const AdDelete_blog = async (req: Request, res: Response) => {
  await Blog.deleteOne({ _id: req.params.id });
- res
-  .status(202)
-  .json({ message: "Successfully Delete the blog", reload: req.url });
+ res.status(202).json({ message: "Successfully Delete the blog" });
 };
 
 //// Deleting a message

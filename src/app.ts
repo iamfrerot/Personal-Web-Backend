@@ -9,6 +9,8 @@ import MongoStore from "connect-mongo";
 import cors from "cors";
 import guestsRoutes from "./routes/guestsRoutes";
 import adminRoutes from "./routes/adminRoutes";
+import swaggerJSDoc, { Options } from "swagger-jsdoc";
+import swaggerUi from "swagger-ui-express";
 
 const app: Express = express();
 const PORT: number | string = process.env.PORT || 2000;
@@ -83,3 +85,34 @@ const AuthorizationMiddleware = (
 
 app.use("/api", guestsRoutes);
 app.use("/admin", AuthorizationMiddleware, upload.any(), adminRoutes);
+
+const info: swaggerJSDoc.Information = {
+ title: "My Brand API",
+ version: "6.2.8",
+ description: "This My Portfolio Website API",
+};
+const options: Options = {
+ definition: {
+  info,
+  openapi: "3.0.0",
+  servers: [
+   {
+    url: "http://localhost:2000",
+   },
+  ],
+  tags: [
+   {
+    name: "Guests",
+    description: "Operations related to open Api's",
+   },
+   {
+    name: "Auth $ Admin",
+    description: "Operations related to autholized user",
+   },
+  ],
+ },
+ apis: ["./src/routes/*.ts"],
+};
+
+const spacs = swaggerJSDoc(options);
+app.use("/docs", swaggerUi.serve, swaggerUi.setup(spacs));
