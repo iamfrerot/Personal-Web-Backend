@@ -251,9 +251,7 @@ var AdDelete_blog = function (req, res) { return __awaiter(void 0, void 0, void 
             case 0: return [4 /*yield*/, DB_1.Blog.deleteOne({ _id: req.params.id })];
             case 1:
                 _a.sent();
-                res
-                    .status(202)
-                    .json({ message: "Successfully Delete the blog", reload: req.url });
+                res.status(202).json({ message: "Successfully Delete the blog" });
                 return [2 /*return*/];
         }
     });

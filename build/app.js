@@ -88,7 +88,8 @@ var options = {
         openapi: "3.0.0",
         servers: [
             {
-                url: "http://localhost:2000",
+                url: "https://energetic-pig-slacks.cyclic.app",
+                url2: "http://localhost:2000",
             },
         ],
         tags: [
