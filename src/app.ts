@@ -96,10 +96,8 @@ const options: Options = {
   info,
   openapi: "3.0.0",
   servers: [
-   {
-    url: "https://energetic-pig-slacks.cyclic.app",
-    url2: "http://localhost:2000",
-   },
+   { url: "https://mybrandbackend-yk4u.onrender.com" },
+   { url: "http://localhost:2000" },
   ],
   tags: [
    {
