@@ -397,6 +397,55 @@
  *                    example: Invalid Credentials
  */
 
+/**
+ * @swagger
+ * /api/contact:
+ *   post:
+ *     summary: Sending Email from Contact Form
+ *     tags:
+ *      - Guests
+ *     requestBody:
+ *       required: true
+ *       content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                name:
+ *                  type: string
+ *                email:
+ *                  type: string
+ *                  format: email
+ *                message:
+ *                  type: string
+ *     responses:
+ *       200:
+ *         content:
+ *            application/json:
+ *              schema:
+ *                type: object
+ *                properties: 
+ *                  data:
+ *                    type: object
+ *                    properties:
+ *                      id:
+ *                        type: string
+ *       400:
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 data:
+ *                   type: object
+ *                 error:
+ *                   type: object
+ *                   properties:
+ *                     message:
+ *                       type: string
+ */
+
+
 require("dotenv").config();
 import express, { Express, Router } from "express";
 import {
@@ -408,6 +457,7 @@ import {
  post_newSub,
  post_newUser,
  post_Login,
+ contact_email,
 } from "../Controllers/guestsContoller";
 
 const app: Express = express();
@@ -425,4 +475,5 @@ router.post("/message/new", post_newMessage);
 router.post("/sub/new", post_newSub);
 router.post("/user/new", post_newUser);
 router.post("/user/login", post_Login);
+router.post("/contact", contact_email);
 export default router;

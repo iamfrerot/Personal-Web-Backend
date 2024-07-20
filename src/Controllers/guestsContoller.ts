@@ -3,9 +3,10 @@ import { Response, Request } from "express";
 import sendEmailNew from "../models/sendNewSub";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { Resend } from "resend";
 
 const jwtSecret = process.env.JWT_SECRET as string;
-
+const resend = new Resend(process.env.RESEND_APIKEY);
 ///// Getting Blogs all
 const get_blogs = async (req: Request, res: Response) => {
  const data = await Blog.find().sort({ createdAt: -1 });
@@ -118,6 +119,32 @@ const post_Login = async (req: Request, res: Response) => {
   console.log(error);
  }
 };
+
+//// Sending Contact Email Though resend
+const contact_email = async (req: Request, res: Response) => {
+ const { name, email, message } = req.body;
+ if (!name)
+  return res
+   .status(400)
+   .json({ data: [], error: { message: "Name is misssing" } });
+ if (!email)
+  return res
+   .status(400)
+   .json({ data: [], error: { message: "Email is misssing" } });
+ if (!message)
+  return res
+   .status(400)
+   .json({ data: [], error: { message: "message is misssing" } });
+ const { data, error } = await resend.emails.send({
+  from: "dev@resend.dev",
+  to: process.env.CONTACT_EMAIL as string,
+  subject: `Portfolio Contact from ${name}`,
+  text: message,
+  reply_to: email,
+ });
+ if (error) return res.status(400).json({ data, error });
+ res.status(200).json({ data });
+};
 export {
  get_blogs,
  get_single_blog,
@@ -127,4 +154,5 @@ export {
  post_newSub,
  post_newUser,
  post_Login,
+ contact_email,
 };
